@@ -12,6 +12,9 @@ sleep 2
 pytest $3 1> errors.txt 0> errors.txt
 
 date_time=`date "+%d-%m-%Y-%H-%M-%S"`
-docker stop $2-chrome-video && mv chrome.mp4 ./$2-video.mp
+file_name="$2-$datetime-video.mp4"
+docker stop $2-chrome-video && mv chrome.mp4 ./$file_name
+
+echo $file_name
 
 
