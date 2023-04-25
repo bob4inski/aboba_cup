@@ -1,20 +1,15 @@
 #!/bin/bash
-#$3 testFile
-# $2 - user
+cp ./test.py ./$1/test.py
 cd $1
-#$1 - это просто пусть к папке юзера
 docker-compose up -d
 sleep 2
-docker stop $2-chrome-video
+docker stop $1-chrome-video
 sleep 10
-docker start $2-chrome-video
+docker start $1-chrome-video
 sleep 2
-pytest $3 1> errors.txt 0> errors.txt
+pytest test.py 1> errors.txt 0> errors.txt
 
 date_time=`date "+%d-%m-%Y-%H-%M-%S"`
-file_name="$2-$datetime-video.mp4"
-docker stop $2-chrome-video && mv chrome.mp4 ./$file_name
-
-echo $file_name
+docker stop $1-chrome-video && mv chrome.mp4 ./chrome-$1-$date_time-video.mp4 
 
 
